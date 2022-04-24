@@ -11,7 +11,6 @@ class Player :
     # 플레이어 그리기
     def drawPlayer(self):
         self.screen.blit(PLAYERIMG, (playerX, playerY))
-        pg.display.update()
 
     def playerMoveUP(self):
         setting.playerY += 2.5
