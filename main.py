@@ -8,14 +8,15 @@ from player import Player
 player = Player()
 pg.init()
 screen = pg.display.set_mode(size)
+clock = pygame.time.Clock()
 
 class MAIN :
     gameState = True
     running = True
-    clock = pygame.time.Clock()
     intro = Intro()
 
-    def init(self):
+    # 게임시작하자 보이는 화면
+    def startGame(self):
         pg.init()
         self.screen = pg.display.set_mode(size)
         pg.display.set_caption(TITLE)
@@ -25,6 +26,10 @@ class MAIN :
         self.drawText("Press key 1...", 40, WHITE, 770, 700)
         pg.display.flip()
         pg.display.update()
+
+        while self.gameState :
+            setting.BGM.play(-1)
+            self.events()
 
     def events(self):
         # 게임 루프가 True일 경우
@@ -38,25 +43,15 @@ class MAIN :
                     print("One Coin!!")
                 elif event.key == pg.K_UP :
                     player.playerMoveUP()
-                    player.drawPlayer()
                 elif event.key == pg.K_DOWN :
                     player.playerMoveDOWN()
-                    player.drawPlayer()
                 elif event.key == pg.K_ESCAPE :
                     print('ESC')
                     self.esc()
 
-
     def new(self):
         self.startGame()
-
-    # 게임 시작
-    def startGame(self):
-        while self.gameState :
-            player.drawPlayer()
-            setting.BGM.play(-1)
-            self.events()
-
+        
     # 메인 게임
     def mainGame(self):
         self.screen.blit(setting.MAPIMG, (0, 0))
@@ -74,5 +69,7 @@ class MAIN :
 
 g = MAIN()
 while g.running:
-    g.init()
+    dt = clock.tick(30)
+    g.startGame()
     g.new()
+    player.drawPlayer()
