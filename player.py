@@ -20,10 +20,10 @@ class Player :
         setting.playerY -= 2.5
         print('down', setting.playerY)
 
-    def playerMoveRight(self):
+    def playerMoveLEFT(self):
         setting.playerX -= 2.5
         print('right', setting.playerX)
 
-    def playerMoveRight(self):
-        setting.playerX -= 2.5
+    def playerMoveRIGHT(self):
+        setting.playerX += 2.5
         print('right', setting.playerX)
