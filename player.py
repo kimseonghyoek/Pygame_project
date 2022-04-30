@@ -22,8 +22,13 @@ class Player :
 
     def playerMoveLEFT(self):
         setting.playerX -= 2.5
-        print('right', setting.playerX)
+        print('left', setting.playerX)
 
     def playerMoveRIGHT(self):
         setting.playerX += 2.5
         print('right', setting.playerX)
+
+    # 플레이어 공격
+    def attack(self):
+        # 아직은 구조가 생각이..
+        return 0
