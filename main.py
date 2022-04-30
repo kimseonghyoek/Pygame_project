@@ -4,6 +4,7 @@ import setting
 from setting import *
 from intro import Intro
 from player import Player
+from mainFunctions import drawText
 
 player = Player()
 pg.init()
@@ -21,9 +22,9 @@ class MAIN :
         self.screen = pg.display.set_mode(size)
         pg.display.set_caption(TITLE)
         screen.blit(self.intro.introImage, (0, 0))
-        self.drawText("OVERROAD", 90, BLACK, 772, 205)
-        self.drawText("OVERROAD", 90, WHITE, 770, 200)
-        self.drawText("Press key 1...", 40, WHITE, 770, 700)
+        drawText("OVERROAD", 90, BLACK, 772, 205)
+        drawText("OVERROAD", 90, WHITE, 770, 200)
+        drawText("Press key 1...", 40, WHITE, 770, 700)
         pg.display.flip()
         pg.display.update()
 
@@ -45,6 +46,10 @@ class MAIN :
                     player.playerMoveUP()
                 elif event.key == pg.K_DOWN :
                     player.playerMoveDOWN()
+                elif event.key == pg.K_LEFT :
+                    player.playerMoveLEFT()
+                elif event.key == pg.K_RIGHT :
+                    player.playerMoveRIGHT()
                 elif event.key == pg.K_ESCAPE :
                     print('ESC')
                     self.esc()
@@ -59,17 +64,8 @@ class MAIN :
         self.events()
         pg.display.flip()
 
-    def drawText(self, text, size, color, x, y):
-        font = pg.font.Font(font_name, size)
-        text_suface = font.render(text, True, color)
-        text_rect = text_suface.get_rect()
-        text_rect.midtop = (x, y)
-        self.screen.blit(text_suface, text_rect)
-        pg.display.flip()
-
 g = MAIN()
 while g.running:
-    dt = clock.tick(30)
     g.startGame()
     g.new()
     player.drawPlayer()
