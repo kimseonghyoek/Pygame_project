@@ -13,17 +13,16 @@ class Player :
         self.screen.blit(PLAYERIMG, (playerX, playerY))
 
     def playerMoveUP(self):
-        setting.playerY += 2.5
+        setting.playerY -= 0.35
         print('up', setting.playerY)
-        self.drawPlayer()
     def playerMoveDOWN(self):
-        setting.playerY -= 2.5
+        setting.playerY += 0.35
         print('down', setting.playerY)
     def playerMoveLEFT(self):
-        setting.playerX -= 2.5
+        setting.playerX -= 0.35
         print('left', setting.playerX)
     def playerMoveRIGHT(self):
-        setting.playerX += 2.5
+        setting.playerX += 0.35
         print('right', setting.playerX)
 
     # 플레이어 공격
