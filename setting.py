@@ -19,15 +19,14 @@ TITLE = "OVERROAD"
 
 # mapImage
 MAPIMG = pygame.image.load("mapIMG.png")
-MAPIMG = pygame.transform.scale(MAPIMG, (1800, 1800))
+MAPIMG = pygame.transform.scale(MAPIMG, (1600, 1600))
 
 # sound
 pygame.init()
 BGM = pygame.mixer.Sound("bgm.mp3")
 
 # player
-PLAYERIMG = pygame.image.load("player.png")
-PLAYERIMG = pygame.transform.scale(PLAYERIMG, (40, 95))
+PLAYERIMG = pygame.image.load("user1.png")
+PLAYERIMG = pygame.transform.scale(PLAYERIMG, (60, 95))
 playerX = 800
 playerY = 300
-playerSpeed = 5
