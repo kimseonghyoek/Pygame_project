@@ -24,20 +24,9 @@ class MAIN :
         screen.blit(self.intro.introImage, (0, 0))
         drawText("OVERROAD", 90, BLACK, 772, 205)
         drawText("OVERROAD", 90, WHITE, 770, 200)
-        drawText("Press key 1...", 40, WHITE, 770, 700)
+        drawText("Press Eny Key...", 40, WHITE, 770, 700)
         pg.display.flip()
         self.wait_for_key()
-
-    def events(self):
-        # 게임 루프가 True일 경우
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                self.running = False
-            elif event.type == pg.KEYDOWN :
-                if event.key == pg.K_1 :
-                    self.mainGame()
-                elif event.key == pg.K_ESCAPE :
-                    self.running = False
 
     # 키입력 받기
     def wait_for_key(self):
@@ -49,6 +38,8 @@ class MAIN :
 
     # 메인 게임
     def mainGame(self):
+        walkCount = 0
+
         screen.blit(setting.MAPIMG, (0, 0))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -66,11 +57,20 @@ class MAIN :
 
         if key_event[pg.K_RIGHT]:
             player.playerMoveRIGHT()
+            screen.blit(player.rightWalk[walkCount], (setting.playerX, setting.playerY))
+            walkCount += 1
+
+        if key_event[pg.K_SPACE]:
+            player.attack()
+            screen.blit(player.rightWalk[walkCount], (setting.playerX, setting.playerY))
+            screen.blit(ATTACKIMG, (setting.playerX + 35, setting.playerY+20))
+            screen.blit(ATTACKIMG, (setting.playerX - 95, setting.playerY + 20))
+        else :
+            screen.blit(PLAYERIMG, (setting.playerX, setting.playerY))
 
 game = MAIN()
 
 game.startView()
 while True :
     game.mainGame()
-    screen.blit(PLAYERIMG, (setting.playerX, setting.playerY))
     pg.display.update()
