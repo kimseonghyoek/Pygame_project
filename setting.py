@@ -27,6 +27,6 @@ BGM = pygame.mixer.Sound("bgm.mp3")
 
 # player
 PLAYERIMG = pygame.image.load("user1.png")
-PLAYERIMG = pygame.transform.scale(PLAYERIMG, (60, 95))
+PLAYERIMG = pygame.transform.scale(PLAYERIMG, (40, 75))
 playerX = 800
 playerY = 300
