@@ -6,6 +6,8 @@ from intro import Intro
 from player import Player
 from mainFunctions import drawText
 
+walkCount = 0
+
 player = Player()
 pg.init()
 screen = pg.display.set_mode(size)
@@ -15,6 +17,8 @@ i = 0
 class MAIN :
     running = True
     intro = Intro()
+    walkCount = 0
+    isRight = False
 
     # 게임시작하자 보이는 화면
     def startView(self):
@@ -44,6 +48,25 @@ class MAIN :
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
+            # if event.type == pg.KEYDOWN :
+            #     if event.key == pg.K_RIGHT :
+            #         isRight = True
+            #
+            #         if walkCount > 4:
+            #             walkCount = 0
+            #
+            #         if isRight == True :
+            #             player.playerMoveRIGHT()
+            #             print(walkCount )
+            #             screen.blit(player.rightWalk[walkCount], (setting.playerX, setting.playerY))
+            #             walkCount += 1
+            #             print(walkCount)
+            #         print("Key down event")
+            #
+            # if event.type == pg.KEYUP :
+            #     if event.key == pg.K_RIGHT :
+            #         isRight = False
+            #         print("Key up event")
 
         key_event = pg.key.get_pressed()
         if key_event[pg.K_UP]:
@@ -57,8 +80,7 @@ class MAIN :
 
         if key_event[pg.K_RIGHT]:
             player.playerMoveRIGHT()
-            screen.blit(player.rightWalk[walkCount], (setting.playerX, setting.playerY))
-            walkCount += 1
+
 
         if key_event[pg.K_SPACE]:
             player.attack()
@@ -70,7 +92,21 @@ class MAIN :
 
 game = MAIN()
 
+# def playerMove():
+#     global walkCount
+#
+#     if walkCount > 4:
+#         walkCount = 0
+#
+#     print(walkCount)
+#     screen.blit(player.rightWalk[walkCount], (setting.playerX, setting.playerY))
+#     walkCount += 1
+#     if walkCount > 4:
+#         walkCount = 0
+#     print(walkCount)
+
 game.startView()
 while True :
     game.mainGame()
+    # playerMove()
     pg.display.update()
