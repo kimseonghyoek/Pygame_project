@@ -79,16 +79,28 @@ class MAIN :
             player.playerMoveLEFT()
 
         if key_event[pg.K_RIGHT]:
+            self.isRight = True
+            self.playerSprite()
             player.playerMoveRIGHT()
-
 
         if key_event[pg.K_SPACE]:
             player.attack()
-            screen.blit(player.rightWalk[walkCount], (setting.playerX, setting.playerY))
             screen.blit(ATTACKIMG, (setting.playerX + 35, setting.playerY+20))
             screen.blit(ATTACKIMG, (setting.playerX - 95, setting.playerY + 20))
-        else :
-            screen.blit(PLAYERIMG, (setting.playerX, setting.playerY))
+        # else :
+        #     screen.blit(PLAYERIMG, (setting.playerX, setting.playerY))
+
+    def playerSprite(self) :
+        global walkCount
+
+        if walkCount >= 3:
+            walkCount = 0
+
+        if self.isRight == True :
+            print('true')
+            screen.blit(player.rightWalk[walkCount], (setting.playerX, setting.playerY))
+            walkCount += 1
+            print(walkCount)
 
 game = MAIN()
 
