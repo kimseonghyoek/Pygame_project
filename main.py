@@ -17,8 +17,10 @@ i = 0
 class MAIN :
     running = True
     intro = Intro()
-    walkCount = 0
     isRight = False
+    isLeft = False
+    isUp = False
+    isDown = False
 
     # 게임시작하자 보이는 화면
     def startView(self):
@@ -48,74 +50,67 @@ class MAIN :
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-            # if event.type == pg.KEYDOWN :
-            #     if event.key == pg.K_RIGHT :
-            #         isRight = True
-            #
-            #         if walkCount > 4:
-            #             walkCount = 0
-            #
-            #         if isRight == True :
-            #             player.playerMoveRIGHT()
-            #             print(walkCount )
-            #             screen.blit(player.rightWalk[walkCount], (setting.playerX, setting.playerY))
-            #             walkCount += 1
-            #             print(walkCount)
-            #         print("Key down event")
-            #
-            # if event.type == pg.KEYUP :
-            #     if event.key == pg.K_RIGHT :
-            #         isRight = False
-            #         print("Key up event")
 
         key_event = pg.key.get_pressed()
         if key_event[pg.K_UP]:
+            self.isUp = True
+            self.playerUpSprite()
             player.playerMoveUP()
-
-        if key_event[pg.K_DOWN]:
+        elif key_event[pg.K_DOWN]:
             player.playerMoveDOWN()
+        else :
+            screen.blit(PLAYERIMG, (setting.playerX, setting.playerY))
 
         if key_event[pg.K_LEFT]:
+            self.isLeft = True
+            self.playerLeftSprite()
             player.playerMoveLEFT()
 
         if key_event[pg.K_RIGHT]:
             self.isRight = True
-            self.playerSprite()
+            self.playerRightSprite()
             player.playerMoveRIGHT()
+
 
         if key_event[pg.K_SPACE]:
             player.attack()
             screen.blit(ATTACKIMG, (setting.playerX + 35, setting.playerY+20))
             screen.blit(ATTACKIMG, (setting.playerX - 95, setting.playerY + 20))
-        # else :
-        #     screen.blit(PLAYERIMG, (setting.playerX, setting.playerY))
 
-    def playerSprite(self) :
+    def playerRightSprite(self) :
         global walkCount
 
-        if walkCount >= 3:
+        if walkCount >= 5:
             walkCount = 0
 
         if self.isRight == True :
-            print('true')
             screen.blit(player.rightWalk[walkCount], (setting.playerX, setting.playerY))
             walkCount += 1
             print(walkCount)
 
-game = MAIN()
+    def playerLeftSprite(self) :
+        global walkCount
 
-# def playerMove():
-#     global walkCount
-#
-#     if walkCount > 4:
-#         walkCount = 0
-#
-#     print(walkCount)
-#     screen.blit(player.rightWalk[walkCount], (setting.playerX, setting.playerY))
-#     walkCount += 1
-#     if walkCount > 4:
-#         walkCount = 0
-#     print(walkCount)
+        if walkCount >= 5:
+            walkCount = 0
+
+        if self.isLeft == True :
+            screen.blit(player.leftWalk[walkCount], (setting.playerX, setting.playerY))
+            walkCount += 1
+            print(walkCount)
+
+    def playerUpSprite(self):
+        global walkCount
+
+        if walkCount >= 5:
+            walkCount = 0
+
+        if self.isUp == True :
+            screen.blit(player.leftWalk[walkCount], (setting.playerX, setting.playerY))
+            walkCount += 1
+            print(walkCount)
+
+game = MAIN()
 
 game.startView()
 while True :
