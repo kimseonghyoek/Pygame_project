@@ -27,6 +27,13 @@ BGM = pygame.mixer.Sound("bgm.mp3")
 
 # player
 PLAYERIMG = pygame.image.load("user1.png")
-PLAYERIMG = pygame.transform.scale(PLAYERIMG, (40, 75))
-playerX = 800
-playerY = 300
+PLAYERLEFTIMG = pygame.image.load("user1Left.png")
+PLAYERIMG = pygame.transform.scale(PLAYERIMG, (30, 55))
+PLAYERLEFTIMG = pygame.transform.scale(PLAYERIMG, (30, 55))
+playerX = 720
+playerY = 400
+ATTACKIMG = pygame.image.load("attack.png")
+
+# enemy
+enemyX = 600
+enemyY = 700
