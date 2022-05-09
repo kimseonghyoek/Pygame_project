@@ -1,9 +1,12 @@
 import pygame as pg
 import sys
+
 import setting
+import random
 from setting import *
 from intro import Intro
 from player import Player
+from enemy import Enemy
 from mainFunctions import drawText
 
 walkCount = 0
@@ -15,6 +18,8 @@ clock = pygame.time.Clock()
 i = 0
 
 class MAIN :
+    swingCount = 0
+
     running = True
     intro = Intro()
     isRight = False
@@ -57,6 +62,8 @@ class MAIN :
             self.playerUpSprite()
             player.playerMoveUP()
         elif key_event[pg.K_DOWN]:
+            self.isDown = True
+            self.playerDownSprite()
             player.playerMoveDOWN()
         else :
             screen.blit(PLAYERIMG, (setting.playerX, setting.playerY))
@@ -86,7 +93,6 @@ class MAIN :
         if self.isRight == True :
             screen.blit(player.rightWalk[walkCount], (setting.playerX, setting.playerY))
             walkCount += 1
-            print(walkCount)
 
     def playerLeftSprite(self) :
         global walkCount
@@ -97,7 +103,6 @@ class MAIN :
         if self.isLeft == True :
             screen.blit(player.leftWalk[walkCount], (setting.playerX, setting.playerY))
             walkCount += 1
-            print(walkCount)
 
     def playerUpSprite(self):
         global walkCount
@@ -108,12 +113,35 @@ class MAIN :
         if self.isUp == True :
             screen.blit(player.leftWalk[walkCount], (setting.playerX, setting.playerY))
             walkCount += 1
-            print(walkCount)
+
+    def playerDownSprite(self):
+        global walkCount
+
+        if walkCount >= 5:
+            walkCount = 0
+
+        if self.isDown == True :
+            screen.blit(player.leftWalk[walkCount], (setting.playerX, setting.playerY))
+            walkCount += 1
+
+    # def addSwingCount(self) :
+    #
+    #     self.swingCount += 1
+    #     if self.swingCount >= 2:
+    #         self.swingCount = 0
+    #
+    # def enemyMoveSprtie(self):
+    #     schedule.every(1).seconds.do(self.addSwingCount)
+    #     schedule.run_pending()
+    #     screen.blit(Enemy.moveEnemy[self.swingCount], (700, 600))
+
 
 game = MAIN()
 
 game.startView()
+
 while True :
     game.mainGame()
-    # playerMove()
+    screen.blit(Enemy.moveEnemy[1], (random.randint(1, 1500), random.randint(1, 850)))
+
     pg.display.update()
