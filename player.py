@@ -22,23 +22,3 @@ class Player :
         setting.playerX -= 0.25
     def playerMoveRIGHT(self):
         setting.playerX += 0.25
-
-    # 플레이어 공격
-    def attack(self):
-        attackLeftRect = setting.ATTACKIMG.get_rect()
-        attackLeftRect.left = setting.playerX + 35
-        attackLeftRect.top = setting.playerY + 15
-
-        attackRightRect = setting.ATTACKIMG.get_rect()
-        attackRightRect.right = setting.playerX - 5
-        attackRightRect.top = setting.playerY + 15
-
-        enemyRect = Enemy.moveEnemy[0].get_rect()
-        enemyRect.left = setting.enemyX
-        enemyRect.top = setting.enemyY
-        
-        if attackLeftRect.colliderect(enemyRect):
-            print(Enemy.enemyList)
-
-        if attackRightRect.colliderect(enemyRect):
-            print(Enemy.enemyList)

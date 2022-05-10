@@ -96,7 +96,7 @@ class MAIN :
 
 
         if key_event[pg.K_SPACE]:
-            player.attack()
+            self.attack()
             screen.blit(ATTACKIMG, (setting.playerX + 35, setting.playerY+20))
             screen.blit(ATTACKIMG, (setting.playerX - 95, setting.playerY + 20))
 
@@ -141,6 +141,7 @@ class MAIN :
             walkCount += 1
 
     def enemyMove(self):
+        global enemy1
         maxX = 1410
         maxY = 760
 
@@ -171,7 +172,7 @@ class MAIN :
         setting.enemyY4 += 0.35
 
 
-        screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX, setting.enemyY)),
+        enemy1 = screen.blit(Enemy.moveEnemy[0], (setting.enemyX, setting.enemyY)),
         screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX2, setting.enemyY3)),
         screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX3, setting.enemyY2)),
         screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX4, setting.enemyY4)),
@@ -185,13 +186,79 @@ class MAIN :
         playerRect.top = setting.playerY
 
         enemyRect = Enemy.moveEnemy[0].get_rect()
-        enemyRect.left = setting.enemyX
-        enemyRect.top = setting.enemyY
+        enemyRect.left = setting.enemyX2
+        enemyRect.top = setting.enemyY3
+
+        enemyRect2 = Enemy.moveEnemy[0].get_rect()
+        enemyRect2.left = setting.enemyX3
+        enemyRect2.top = setting.enemyY2
+
+        enemyRect3 = Enemy.moveEnemy[0].get_rect()
+        enemyRect3.left = setting.enemyX4
+        enemyRect3.top = setting.enemyY4
+
+        enemyRect4 = Enemy.moveEnemy[0].get_rect()
+        enemyRect4.left = setting.enemyX2
+        enemyRect4.top = setting.enemyY
+
+        enemyRect5 = Enemy.moveEnemy[0].get_rect()
+        enemyRect5.left = setting.enemyX3
+        enemyRect5.top = setting.enemyY4
+
+        enemyRect6 = Enemy.moveEnemy[0].get_rect()
+        enemyRect6.left = setting.enemyX4
+        enemyRect6.top = setting.enemyY
 
         if playerRect.colliderect(enemyRect):
             self.endView()
             self.running = False
             self.wait_for_key()
+
+        if playerRect.colliderect(enemyRect2):
+            self.endView()
+            self.running = False
+            self.wait_for_key()
+
+        if playerRect.colliderect(enemyRect3):
+            self.endView()
+            self.running = False
+            self.wait_for_key()
+
+        if playerRect.colliderect(enemyRect4):
+            self.endView()
+            self.running = False
+            self.wait_for_key()
+
+        if playerRect.colliderect(enemyRect5):
+            self.endView()
+            self.running = False
+            self.wait_for_key()
+
+        if playerRect.colliderect(enemyRect6 ):
+            self.endView()
+            self.running = False
+            self.wait_for_key()
+
+    # 플레이어 공격
+    def attack(self):
+        attackLeftRect = setting.ATTACKIMG.get_rect()
+        attackLeftRect.left = setting.playerX + 35
+        attackLeftRect.top = setting.playerY + 15
+
+        attackRightRect = setting.ATTACKIMG.get_rect()
+        attackRightRect.right = setting.playerX - 5
+        attackRightRect.top = setting.playerY + 15
+
+        enemyRect = Enemy.moveEnemy[0].get_rect()
+        enemyRect.left = setting.enemyX
+        enemyRect.top = setting.enemyY
+
+        if attackLeftRect.colliderect(enemyRect):
+            print("왼쪽공격")
+
+
+        if attackRightRect.colliderect(enemyRect):
+            print("오른쪽공격")
 
 game = MAIN()
 
