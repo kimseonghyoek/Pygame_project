@@ -30,7 +30,7 @@ class Player :
         attackLeftRect.top = setting.playerY + 15
 
         attackRightRect = setting.ATTACKIMG.get_rect()
-        attackRightRect.right = setting.playerX - 85
+        attackRightRect.right = setting.playerX - 5
         attackRightRect.top = setting.playerY + 15
 
         enemyRect = Enemy.moveEnemy[0].get_rect()
