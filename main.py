@@ -2,7 +2,6 @@ import pygame as pg
 import sys
 
 import setting
-import random
 from setting import *
 from intro import Intro
 from player import Player
@@ -18,8 +17,10 @@ clock = pygame.time.Clock()
 i = 0
 
 class MAIN :
-    swingCount = 0
 
+    enemyList = []
+
+    notover = False
     running = True
     intro = Intro()
     isRight = False
@@ -39,6 +40,11 @@ class MAIN :
         pg.display.flip()
         self.wait_for_key()
 
+    def endView(self):
+        screen.blit(self.intro.introImage, (0, 0))
+        drawText("GAME OVER...", 90, BLACK, 772, 205)
+        pg.display.flip()
+
     # 키입력 받기
     def wait_for_key(self):
         wating = True
@@ -53,6 +59,15 @@ class MAIN :
         walkCount = 0
         screen.blit(setting.MAPIMG, (0, 0))
         self.enemyMove()
+        if setting.playerX < 0:
+            setting.playerX = 0
+        elif setting.playerX > setting.size[0] - 30:
+            setting.playerX = setting.size[0] - 30
+
+        if setting.playerY < 0:
+            setting.playerY = 0
+        elif setting.playerY > setting.size[1] - 55:
+            setting.playerY = setting.size[1] - 55
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -156,17 +171,33 @@ class MAIN :
         setting.enemyY4 += 0.35
 
 
-        screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX, setting.enemyY))
-        screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX2, setting.enemyY3))
-        screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX3, setting.enemyY2))
-        screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX4, setting.enemyY4))
-        screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX2, setting.enemyY))
-        screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX3, setting.enemyY4))
+        screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX, setting.enemyY)),
+        screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX2, setting.enemyY3)),
+        screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX3, setting.enemyY2)),
+        screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX4, setting.enemyY4)),
+        screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX2, setting.enemyY)),
+        screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX3, setting.enemyY4)),
         screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX4, setting.enemyY))
+
+    def Crash(self):
+        playerRect = setting.PLAYERIMG.get_rect()
+        playerRect.left = setting.playerX
+        playerRect.top = setting.playerY
+
+        enemyRect = Enemy.moveEnemy[0].get_rect()
+        enemyRect.left = setting.enemyX
+        enemyRect.top = setting.enemyY
+
+        if playerRect.colliderect(enemyRect):
+            self.endView()
+            self.running = False
+            self.wait_for_key()
 
 game = MAIN()
 
 game.startView()
-while True :
+while game.running :
     game.mainGame()
+    game.Crash()
     pg.display.update()
+game.endView()
