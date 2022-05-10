@@ -8,4 +8,3 @@ def WAITFORKEY() :
             if event.type == pygame.KEYUP :
                 waiting = False
                 print('key event!!!')
-

@@ -1,4 +1,6 @@
 # Color Setting
+import random
+
 import pygame.mixer
 
 # Color Setting
@@ -35,5 +37,11 @@ playerY = 400
 ATTACKIMG = pygame.image.load("attack.png")
 
 # enemy
-enemyX = 600
-enemyY = 700
+enemyX = random.randint(10, 1400)
+enemyY = random.randint(10, 750)
+enemyX2 = random.randint(10, 1400)
+enemyY2 = random.randint(10, 750)
+enemyX3 = random.randint(10, 1400)
+enemyY3 = random.randint(10, 750)
+enemyX4 = random.randint(10, 1400)
+enemyY4 = random.randint(10, 750)
