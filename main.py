@@ -144,31 +144,49 @@ class MAIN :
         global enemy1
         maxX = 1410
         maxY = 760
+        minX = 10
+        minY = 10
 
         if setting.enemyX >= maxX :
             setting.enemyX = random.randint(10, 1400)
+        elif setting.enemyX <= minX :
+            setting.enemyX = random.randint(10, 1400)
         if setting.enemyX2 >= maxX :
+            setting.enemyX2 = random.randint(10, 1400)
+        elif setting.enemyX2 <= minX :
             setting.enemyX2 = random.randint(10, 1400)
         if setting.enemyX3 >= maxX :
             setting.enemyX3 = random.randint(10, 1400)
+        elif setting.enemyX3 <= minX :
+            setting.enemyX3 = random.randint(10, 1400)
         if setting.enemyX4 >= maxX :
+            setting.enemyX4 = random.randint(10, 1400)
+        elif setting.enemyX4 <= minX :
             setting.enemyX4 = random.randint(10, 1400)
         if setting.enemyY >= maxY :
             setting.enemyY = random.randint(10, 750)
+        elif setting.enemyY <= minY :
+            setting.enemyY = random.randint(10, 750)
         if setting.enemyY2 >= maxY :
+            setting.enemyY2 = random.randint(10, 750)
+        elif setting.enemyY2 <= minY :
             setting.enemyY2 = random.randint(10, 750)
         if setting.enemyY3 >= maxY :
             setting.enemyY3 = random.randint(10, 750)
+        elif setting.enemyY3 <= minY :
+            setting.enemyY3 = random.randint(10, 750)
         if setting.enemyY4 >= maxY :
+            setting.enemyY4 = random.randint(10, 750)
+        elif setting.enemyY4 <= minY :
             setting.enemyY4 = random.randint(10, 750)
 
         setting.enemyX += 0.35
-        setting.enemyX2 += 0.35
+        setting.enemyX2 -= 0.35
         setting.enemyX3 += 0.35
-        setting.enemyX4 += 0.35
+        setting.enemyX4 -= 0.35
         setting.enemyY += 0.35
         setting.enemyY2 += 0.35
-        setting.enemyY3 += 0.35
+        setting.enemyY3 -= 0.35
         setting.enemyY4 += 0.35
 
 
@@ -234,7 +252,7 @@ class MAIN :
             self.running = False
             self.wait_for_key()
 
-        if playerRect.colliderect(enemyRect6 ):
+        if playerRect.colliderect(enemyRect6):
             self.endView()
             self.running = False
             self.wait_for_key()
@@ -253,13 +271,61 @@ class MAIN :
         enemyRect.left = setting.enemyX
         enemyRect.top = setting.enemyY
 
+        enemyRect2 = Enemy.moveEnemy[0].get_rect()
+        enemyRect2.left = setting.enemyX3
+        enemyRect2.top = setting.enemyY2
+
+        enemyRect3 = Enemy.moveEnemy[0].get_rect()
+        enemyRect3.left = setting.enemyX4
+        enemyRect3.top = setting.enemyY4
+
+        enemyRect4 = Enemy.moveEnemy[0].get_rect()
+        enemyRect4.left = setting.enemyX2
+        enemyRect4.top = setting.enemyY
+
+        enemyRect5 = Enemy.moveEnemy[0].get_rect()
+        enemyRect5.left = setting.enemyX3
+        enemyRect5.top = setting.enemyY4
+
+        enemyRect6 = Enemy.moveEnemy[0].get_rect()
+        enemyRect6.left = setting.enemyX4
+        enemyRect6.top = setting.enemyY
+
         if attackLeftRect.colliderect(enemyRect):
             print("왼쪽공격")
-
 
         if attackRightRect.colliderect(enemyRect):
             print("오른쪽공격")
 
+        if attackLeftRect.colliderect(enemyRect2):
+            print("왼쪽공격")
+
+        if attackRightRect.colliderect(enemyRect2):
+            print("오른쪽공격")
+
+        if attackLeftRect.colliderect(enemyRect3):
+            print("왼쪽공격")
+
+        if attackRightRect.colliderect(enemyRect3):
+            print("오른쪽공격")
+
+        if attackLeftRect.colliderect(enemyRect4):
+            print("왼쪽공격")
+
+        if attackRightRect.colliderect(enemyRect4):
+            print("오른쪽공격")
+
+        if attackLeftRect.colliderect(enemyRect5):
+            print("왼쪽공격")
+
+        if attackRightRect.colliderect(enemyRect5):
+            print("오른쪽공격")
+
+        if attackLeftRect.colliderect(enemyRect6):
+            print("왼쪽공격")
+
+        if attackRightRect.colliderect(enemyRect6):
+            print("오른쪽공격")
 game = MAIN()
 
 game.startView()
