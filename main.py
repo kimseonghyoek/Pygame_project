@@ -12,7 +12,7 @@ from mainFunctions import drawText
 
 walkCount = 0
 
-player = Player()
+playerlor = Player()
 pg.init()
 screen = pg.display.set_mode(size)
 clock = pygame.time.Clock()
@@ -29,6 +29,8 @@ class MAIN :
     isLeft = False
     isUp = False
     isDown = False
+
+    enemy1 = Enemy('enemy1')
 
     # 게임시작하자 보이는 화면
     def startView(self):
@@ -57,7 +59,7 @@ class MAIN :
 
     # 메인 게임
     def mainGame(self):
-
+        self.enemyList.append(self.enemy1)
         walkCount = 0
         screen.blit(setting.MAPIMG, (0, 0))
         if setting.playerX < 0:
@@ -77,23 +79,23 @@ class MAIN :
         if key_event[pg.K_UP]:
             self.isUp = True
             self.playerUpSprite()
-            player.playerMoveUP()
+            playerlor.playerMoveUP()
         elif key_event[pg.K_DOWN]:
             self.isDown = True
             self.playerDownSprite()
-            player.playerMoveDOWN()
+            playerlor.playerMoveDOWN()
         else :
             screen.blit(PLAYERIMG, (setting.playerX, setting.playerY))
 
         if key_event[pg.K_LEFT]:
             self.isLeft = True
             self.playerLeftSprite()
-            player.playerMoveLEFT()
+            playerlor.playerMoveLEFT()
 
         if key_event[pg.K_RIGHT]:
             self.isRight = True
             self.playerRightSprite()
-            player.playerMoveRIGHT()
+            playerlor.playerMoveRIGHT()
 
 
         if key_event[pg.K_SPACE]:
@@ -101,17 +103,8 @@ class MAIN :
             screen.blit(ATTACKIMG, (setting.playerX + 35, setting.playerY+20))
             screen.blit(ATTACKIMG, (setting.playerX - 95, setting.playerY + 20))
 
-
-        enemy1 = Enemy('enemy1', random.randint(10, 1400), random.randint(10, 750))
-
-        # Enemy.enemyMove()
-        screen.blit(Enemy.moveEnemy[0], (setting.enemyX, setting.enemyY)),
-        # screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX2, setting.enemyY3)),
-        # screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX3, setting.enemyY2)),
-        # screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX4, setting.enemyY4)),
-        # screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX2, setting.enemyY)),
-        # screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX3, setting.enemyY4)),
-        # screen.blit(Enemy.moveEnemy[random.randint(0, 1)], (setting.enemyX4, setting.enemyY))
+        self.enemy1.enemyMove()
+        self.Crash()
 
     def playerRightSprite(self) :
         global walkCount
@@ -120,7 +113,7 @@ class MAIN :
             walkCount = 0
 
         if self.isRight == True :
-            screen.blit(player.rightWalk[walkCount], (setting.playerX, setting.playerY))
+            screen.blit(playerlor.rightWalk[walkCount], (setting.playerX, setting.playerY))
             walkCount += 1
 
     def playerLeftSprite(self) :
@@ -130,7 +123,7 @@ class MAIN :
             walkCount = 0
 
         if self.isLeft == True :
-            screen.blit(player.leftWalk[walkCount], (setting.playerX, setting.playerY))
+            screen.blit(playerlor.leftWalk[walkCount], (setting.playerX, setting.playerY))
             walkCount += 1
 
     def playerUpSprite(self):
@@ -140,7 +133,7 @@ class MAIN :
             walkCount = 0
 
         if self.isUp == True :
-            screen.blit(player.leftWalk[walkCount], (setting.playerX, setting.playerY))
+            screen.blit(playerlor.leftWalk[walkCount], (setting.playerX, setting.playerY))
             walkCount += 1
 
     def playerDownSprite(self):
@@ -150,59 +143,8 @@ class MAIN :
             walkCount = 0
 
         if self.isDown == True :
-            screen.blit(player.leftWalk[walkCount], (setting.playerX, setting.playerY))
+            screen.blit(playerlor.leftWalk[walkCount], (setting.playerX, setting.playerY))
             walkCount += 1
-
-    # def enemyMove(self):
-    #     global enemy1
-    #     maxX = 1410
-    #     maxY = 760
-    #     minX = 10
-    #     minY = 10
-    #
-    #     if setting.enemyX >= maxX :
-    #         setting.enemyX = random.randint(10, 1400)
-    #     elif setting.enemyX <= minX :
-    #         setting.enemyX = random.randint(10, 1400)
-    #     if setting.enemyX2 >= maxX :
-    #         setting.enemyX2 = random.randint(10, 1400)
-    #     elif setting.enemyX2 <= minX :
-    #         setting.enemyX2 = random.randint(10, 1400)
-    #     if setting.enemyX3 >= maxX :
-    #         setting.enemyX3 = random.randint(10, 1400)
-    #     elif setting.enemyX3 <= minX :
-    #         setting.enemyX3 = random.randint(10, 1400)
-    #     if setting.enemyX4 >= maxX :
-    #         setting.enemyX4 = random.randint(10, 1400)
-    #     elif setting.enemyX4 <= minX :
-    #         setting.enemyX4 = random.randint(10, 1400)
-    #     if setting.enemyY >= maxY :
-    #         setting.enemyY = random.randint(10, 750)
-    #     elif setting.enemyY <= minY :
-    #         setting.enemyY = random.randint(10, 750)
-    #     if setting.enemyY2 >= maxY :
-    #         setting.enemyY2 = random.randint(10, 750)
-    #     elif setting.enemyY2 <= minY :
-    #         setting.enemyY2 = random.randint(10, 750)
-    #     if setting.enemyY3 >= maxY :
-    #         setting.enemyY3 = random.randint(10, 750)
-    #     elif setting.enemyY3 <= minY :
-    #         setting.enemyY3 = random.randint(10, 750)
-    #     if setting.enemyY4 >= maxY :
-    #         setting.enemyY4 = random.randint(10, 750)
-    #     elif setting.enemyY <= minY :
-    #         setting.enemyY = random.randint(10, 750)
-    #
-    #     setting.enemyX += 0.35
-    #     setting.enemyX2 -= 0.35
-    #     setting.enemyX3 += 0.35
-    #     setting.enemyX4 -= 0.35
-    #     setting.enemyY += 0.35
-    #     setting.enemyY2 += 0.35
-    #     setting.enemyY3 -= 0.35
-    #     setting.enemyY4 += 0.35
-    #
-    #
 
     def Crash(self):
         playerRect = setting.PLAYERIMG.get_rect()
@@ -210,56 +152,11 @@ class MAIN :
         playerRect.top = setting.playerY
 
         enemyRect = Enemy.moveEnemy[0].get_rect()
-        enemyRect.left = setting.enemyX2
-        enemyRect.top = setting.enemyY3
-
-        enemyRect2 = Enemy.moveEnemy[0].get_rect()
-        enemyRect2.left = setting.enemyX3
-        enemyRect2.top = setting.enemyY2
-
-        enemyRect3 = Enemy.moveEnemy[0].get_rect()
-        enemyRect3.left = setting.enemyX4
-        enemyRect3.top = setting.enemyY4
-
-        enemyRect4 = Enemy.moveEnemy[0].get_rect()
-        enemyRect4.left = setting.enemyX2
-        enemyRect4.top = setting.enemyY
-
-        enemyRect5 = Enemy.moveEnemy[0].get_rect()
-        enemyRect5.left = setting.enemyX3
-        enemyRect5.top = setting.enemyY4
-
-        enemyRect6 = Enemy.moveEnemy[0].get_rect()
-        enemyRect6.left = setting.enemyX4
-        enemyRect6.top = setting.enemyY
+        enemyRect.left = setting.enemyX
+        enemyRect.top = setting.enemyY
 
         if playerRect.colliderect(enemyRect):
             time.sleep(3)
-            self.endView()
-            self.running = False
-            self.wait_for_key()
-
-        if playerRect.colliderect(enemyRect2):
-            self.endView()
-            self.running = False
-            self.wait_for_key()
-
-        if playerRect.colliderect(enemyRect3):
-            self.endView()
-            self.running = False
-            self.wait_for_key()
-
-        if playerRect.colliderect(enemyRect4):
-            self.endView()
-            self.running = False
-            self.wait_for_key()
-
-        if playerRect.colliderect(enemyRect5):
-            self.endView()
-            self.running = False
-            self.wait_for_key()
-
-        if playerRect.colliderect(enemyRect6):
             self.endView()
             self.running = False
             self.wait_for_key()
@@ -274,65 +171,20 @@ class MAIN :
         attackRightRect.right = setting.playerX - 5
         attackRightRect.top = setting.playerY + 15
 
-        enemyRect = Enemy.moveEnemy[0].get_rect()
+        enemyRect = self.enemy1.moveEnemy[0].get_rect()
         enemyRect.left = setting.enemyX
         enemyRect.top = setting.enemyY
 
-        enemyRect2 = Enemy.moveEnemy[0].get_rect()
-        enemyRect2.left = setting.enemyX3
-        enemyRect2.top = setting.enemyY2
-
-        enemyRect3 = Enemy.moveEnemy[0].get_rect()
-        enemyRect3.left = setting.enemyX4
-        enemyRect3.top = setting.enemyY4
-
-        enemyRect4 = Enemy.moveEnemy[0].get_rect()
-        enemyRect4.left = setting.enemyX2
-        enemyRect4.top = setting.enemyY
-
-        enemyRect5 = Enemy.moveEnemy[0].get_rect()
-        enemyRect5.left = setting.enemyX3
-        enemyRect5.top = setting.enemyY4
-
-        enemyRect6 = Enemy.moveEnemy[0].get_rect()
-        enemyRect6.left = setting.enemyX4
-        enemyRect6.top = setting.enemyY
-
         if attackLeftRect.colliderect(enemyRect):
+            self.enemyList.clear()
+            print(self.enemyList)
             print("왼쪽공격")
 
         if attackRightRect.colliderect(enemyRect):
             print("오른쪽공격")
+            print(self.enemyList)
+            self.enemyList.clear()
 
-        if attackLeftRect.colliderect(enemyRect2):
-            print("왼쪽공격")
-
-        if attackRightRect.colliderect(enemyRect2):
-            print("오른쪽공격")
-
-        if attackLeftRect.colliderect(enemyRect3):
-            print("왼쪽공격")
-
-        if attackRightRect.colliderect(enemyRect3):
-            print("오른쪽공격")
-
-        if attackLeftRect.colliderect(enemyRect4):
-            print("왼쪽공격")
-
-        if attackRightRect.colliderect(enemyRect4):
-            print("오른쪽공격")
-
-        if attackLeftRect.colliderect(enemyRect5):
-            print("왼쪽공격")
-
-        if attackRightRect.colliderect(enemyRect5):
-            print("오른쪽공격")
-
-        if attackLeftRect.colliderect(enemyRect6):
-            print("왼쪽공격")
-
-        if attackRightRect.colliderect(enemyRect6):
-            print("오른쪽공격")
 game = MAIN()
 
 game.startView()
