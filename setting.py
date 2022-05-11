@@ -37,8 +37,8 @@ playerY = 400
 ATTACKIMG = pygame.image.load("attack.png")
 
 # enemy
-enemyX = random.randint(10, 1400)
-enemyY = random.randint(10, 750)
+# enemyX = random.randint(10, 1400)
+# enemyY = random.randint(10, 750)
 enemyX2 = random.randint(10, 1400)
 enemyY2 = random.randint(10, 750)
 enemyX3 = random.randint(10, 1400)
