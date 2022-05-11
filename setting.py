@@ -45,3 +45,5 @@ enemyX3 = random.randint(10, 1400)
 enemyY3 = random.randint(10, 750)
 enemyX4 = random.randint(10, 1400)
 enemyY4 = random.randint(10, 750)
+
+deadEnemy = 0

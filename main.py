@@ -60,7 +60,6 @@ class MAIN :
     # 메인 게임
     def mainGame(self):
         self.enemyList.append(self.enemy1)
-        walkCount = 0
         screen.blit(setting.MAPIMG, (0, 0))
         if setting.playerX < 0:
             setting.playerX = 0
@@ -99,7 +98,7 @@ class MAIN :
 
 
         if key_event[pg.K_SPACE]:
-            self.attack()
+            self.enemy1.attack()
             screen.blit(ATTACKIMG, (setting.playerX + 35, setting.playerY+20))
             screen.blit(ATTACKIMG, (setting.playerX - 95, setting.playerY + 20))
 
@@ -160,30 +159,6 @@ class MAIN :
             self.endView()
             self.running = False
             self.wait_for_key()
-
-    # 플레이어 공격
-    def attack(self):
-        attackLeftRect = setting.ATTACKIMG.get_rect()
-        attackLeftRect.left = setting.playerX + 35
-        attackLeftRect.top = setting.playerY + 15
-
-        attackRightRect = setting.ATTACKIMG.get_rect()
-        attackRightRect.right = setting.playerX - 5
-        attackRightRect.top = setting.playerY + 15
-
-        enemyRect = self.enemy1.moveEnemy[0].get_rect()
-        enemyRect.left = setting.enemyX
-        enemyRect.top = setting.enemyY
-
-        if attackLeftRect.colliderect(enemyRect):
-            self.enemyList.clear()
-            print(self.enemyList)
-            print("왼쪽공격")
-
-        if attackRightRect.colliderect(enemyRect):
-            print("오른쪽공격")
-            print(self.enemyList)
-            self.enemyList.clear()
 
 game = MAIN()
 
